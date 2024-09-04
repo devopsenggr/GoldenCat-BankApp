@@ -10,43 +10,7 @@ pipeline {
     }
     stages {
         
-        stage('Cleaning Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
         
-        stage('CodeCheckOutforUpdate') {
-            steps {
-           git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
-            }
-        }
-        
-        stage('Compile') {
-            steps {
-            sh  "mvn compile"
-            }
-        }
-        
-        
-        stage('Package') {
-            steps {
-                sh "mvn package"
-            }
-        }
-                
-        stage('Docker BuildTag and push') {
-            steps {
-                script
-                {
-                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') 
-                    {
-                        sh'docker build -t awsd43/goldencatbankapp:${BUILD_NUMBER} .'
-                        sh 'docker push awsd43/goldencatbankapp:${BUILD_NUMBER}'
-                    }
-                }
-            }
-        } 
         
         stage('CodeCheckOut') {
             steps {
