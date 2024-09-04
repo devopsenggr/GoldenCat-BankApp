@@ -36,7 +36,7 @@ pipeline {
                     git add deployment-service.yml
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                   
-                    git push '''
+                    git push --set-upstream origin main'''
                 }
                 
             }
