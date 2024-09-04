@@ -16,7 +16,7 @@ pipeline {
             }
         }
         
-        stage('CodeCheckOut') {
+        stage('CodeCheckOutforUpdate') {
             steps {
            git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
             }
