@@ -8,4 +8,4 @@ COPY target/*.jar $APP_HOME/app.jar
 
 WORKDIR $APP_HOME
 
-ENTRYPOINT ["java", "-jar", "APP_HOME/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
