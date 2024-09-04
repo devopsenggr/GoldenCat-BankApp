@@ -36,7 +36,7 @@ pipeline {
                     git add deployment-service.yml
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                   
-                    git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}'''
+                    git push '''
                 }
                 
             }
