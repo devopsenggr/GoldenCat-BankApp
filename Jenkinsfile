@@ -35,9 +35,8 @@ pipeline {
                     sed -i "s/goldencatbankapp:.*/$goldencatbankapp:${BUILD_NUMBER}/" deployment-service.yml
                     git add deployment-service.yml
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                    git remote rm origin
-                    git remote add origin 'git@github.com:${GIT_USER_NAME}/GoldenCat-BankApp.git'
-                    git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master'''
+                  
+                    git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}'''
                 }
                 
             }
