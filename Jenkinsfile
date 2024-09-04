@@ -101,8 +101,8 @@ pipeline {
                     git config user.name "devopsenggr"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     echo $BUILD_NUMBER
-                    sed -i "s/goldencatbankapp:.*/$goldencatbankapp:${BUILD_NUMBER}/" deployment-service.yaml
-                    git add deployment-service.yaml
+                    sed -i "s/goldencatbankapp:.*/$goldencatbankapp:${BUILD_NUMBER}/" deployment-service.yml
+                    git add deployment-service.yml
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                     git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master'''
                 }
