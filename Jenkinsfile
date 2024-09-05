@@ -3,8 +3,7 @@ pipeline {
     
     
     stages {
-        
-                 
+               
         
         stage('Update Deployment file') 
         {
@@ -20,7 +19,6 @@ pipeline {
                 {
                     script
                     {
-                    sh '''
                     set -x
                     git config --global user.email "awstraining42@gmail.com"
                     git config --global user.name "devopsenggr"
@@ -29,13 +27,11 @@ pipeline {
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                     git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:master
-                   
-                    '''
                     }
                 }
-                
             }
-        }
+                
+            }//stage
+        }//stages
         
-    }
-}
+    }//pipe
