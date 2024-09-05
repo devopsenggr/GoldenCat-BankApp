@@ -26,9 +26,8 @@ pipeline {
             }
             steps 
             {
-               withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'github-token')])
+               withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) 
                 {
-                
                     sh '''
                     set -x
                     git config --global user.email "awstraining42@gmail.com"
