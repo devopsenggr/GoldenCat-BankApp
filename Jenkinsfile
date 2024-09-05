@@ -26,7 +26,7 @@ pipeline {
             }
             steps 
             {
-               withCredentials([string(credentialsId: 'github', variable: 'github-token')]) 
+              withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'github-token')]) 
                 {
                     sh '''
                     set -x
@@ -35,8 +35,10 @@ pipeline {
                     sed -i "s|goldencatbankapp:.*|$goldencatbankapp:${BUILD_NUMBER}|g" deployment-service.yml
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
+                    git remote add origin https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
+                    git push -u origin main
                     git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
-                    git push --set-upstream origin main
+                   #git push --set-upstream origin main
                     '''
                 }
                 
