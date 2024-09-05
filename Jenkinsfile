@@ -36,8 +36,7 @@ pipeline {
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                     git push -u origin main
-                    git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
-                   #git push --set-upstream origin main
+                   
                     '''
                 }
                 
