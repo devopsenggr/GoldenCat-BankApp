@@ -4,18 +4,7 @@ pipeline {
     
     stages {
         
-        stage('Cleaning Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
-        
-        stage('CodeCheckOutforUpdate') {
-            steps {
-           git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
-            }
-        }
-        
+                 
         
         stage('Update Deployment file') 
         {
@@ -24,10 +13,13 @@ pipeline {
                 GIT_REPO_NAME = "GoldenCat-BankApp"
                 GIT_USER_NAME = "devopsenggr"
             }
+            git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
             steps 
             {
               withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'github-token')]) 
                 {
+                    script
+                    {
                     sh '''
                     set -x
                     git config --global user.email "awstraining42@gmail.com"
@@ -36,9 +28,10 @@ pipeline {
                     sed -i "s|goldencatbankapp:.*|$goldencatbankapp:${BUILD_NUMBER}|g" deployment-service.yml
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                    git push -u origin main
+                    git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:master
                    
                     '''
+                    }
                 }
                 
             }
