@@ -36,7 +36,7 @@ pipeline {
                     sed -i "s/goldencatbankapp:.*/$goldencatbankapp:${BUILD_NUMBER}/" deployment-service.yml
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                    git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                    git push https://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@github.com/devopsenggr/GoldenCat-BankApp.git HEAD:master
                     git push --set-upstream origin main
                     '''
                 }
