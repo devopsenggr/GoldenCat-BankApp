@@ -35,7 +35,7 @@ pipeline {
                     git config user.name "devopsenggr"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     echo $BUILD_NUMBER
-                    sed -i 's|goldencatbankapp:.*|goldencatbankapp:${BUILD_NUMBER}|g' deployment-service.yml
+                    sed -i 's|goldencatbankapp:.*|goldencatbankapp:\${BUILD_NUMBER}|g' deployment-service.yml
                     cat deployment-service.yml
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
