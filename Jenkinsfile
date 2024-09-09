@@ -1,10 +1,8 @@
-pipeline { 
-    agent any
-    
-    
-    stages {
-               
-        
+stage('CodeCheckOutForUpdate') {
+            steps {
+           git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
+            }
+        }
         stage('Update Deployment file') 
         {
             environment 
@@ -12,26 +10,19 @@ pipeline {
                 GIT_REPO_NAME = "GoldenCat-BankApp"
                 GIT_USER_NAME = "devopsenggr"
             }
-            git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
             steps 
             {
-              withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'github-token')]) 
-                {
-                    script
-                    {
-                    set -x
-                    git config --global user.email "awstraining42@gmail.com"
-                    git config --global user.name "devopsenggr"
-                    git checkout main
-                    sed -i "s|goldencatbankapp:.*|$goldencatbankapp:${BUILD_NUMBER}|g" deployment-service.yml
-                    git add .
+               
+                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                    sh '''git config user.email "awstraining42@gmail.com"
+                    git config user.name "devopsenggr"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+                    echo $BUILD_NUMBER
+                    sed -i "s/goldencatbankapp:${imageTag}/$goldencatbankapp:${BUILD_NUMBER}/" deployment-service.yml
+                    git add deployment-service.yml
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                    git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:master
-                    }
+                    git push https://${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main'''
                 }
-            }
                 
-            }//stage
-        }//stages
-        
-    }//pipe
+            }
+        }
