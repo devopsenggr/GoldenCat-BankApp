@@ -30,6 +30,7 @@ pipeline {
                
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
                     sh '''
+                    set +e
                     git config user.email "awstraining42@gmail.com"
                     git config user.name "devopsenggr"
                     BUILD_NUMBER=${BUILD_NUMBER}
