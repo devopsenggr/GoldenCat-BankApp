@@ -1,0 +1,13 @@
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/TwitterAppApplication.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/config/CustomUserDetails.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/config/CustomUserDetailsService.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/config/SecurityConfig.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/controller/PostController.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/controller/UserController.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/model/Post.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/model/User.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/repository/PostRepository.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/repository/UserRepository.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/service/PostService.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/service/UserService.java
+/var/lib/jenkins/workspace/ci/src/main/java/com/example/twitterapp/service/UserServiceImpl.java

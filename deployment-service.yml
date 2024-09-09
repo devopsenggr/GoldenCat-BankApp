@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bloggingapp
-          image: awsd43/goldencatbankapp: 70
+          image: awsd43/goldencatbankapp: 12
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
