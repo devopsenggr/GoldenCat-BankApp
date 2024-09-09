@@ -33,6 +33,8 @@ pipeline {
                     set +e
                     git config user.email "awstraining42@gmail.com"
                     git config user.name "devopsenggr"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+                    echo $BUILD_NUMBER
                     sed -i 's|goldencatbankapp:.*|goldencatbankapp:${BUILD_NUMBER}|g' deployment-service.yml
                     cat deployment-service.yml
                     git add .
