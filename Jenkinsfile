@@ -36,7 +36,7 @@ pipeline {
                     BUILD_NUMBER=${BUILD_NUMBER}
                     echo $BUILD_NUMBER
                     cat deployment-service.yml
-                    sed -i "s/goldencatbankapp:.* /goldencatbankapp:${BUILD_NUMBER}/g" deployment-service.yml
+                    sed -i 's/goldencatbankapp:.*/goldencatbankapp:${BUILD_NUMBER}/g' deployment-service.yml
                     cat deployment-serivce.yml
                     git add .
                     git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
