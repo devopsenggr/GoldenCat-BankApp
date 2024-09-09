@@ -1,4 +1,19 @@
-stage('CodeCheckOutForUpdate') {
+pipeline { 
+    agent any
+    
+    tools {
+        maven 'maven3'
+        jdk 'jdk17'
+    }
+     stages {
+        
+        stage('Cleaning Workspace') {
+            steps {
+                cleanWs()
+            }
+        }       
+            
+        stage('CodeCheckOutForUpdate') {
             steps {
            git branch: 'main', url: 'https://github.com/devopsenggr/GoldenCat-BankApp.git'
             }
@@ -25,4 +40,7 @@ stage('CodeCheckOutForUpdate') {
                 }
                 
             }
+
         }
+     }
+            
