@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bloggingapp
-          image: awsd43/blogapp:6
+          image: awsd43/blogapp:8
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
