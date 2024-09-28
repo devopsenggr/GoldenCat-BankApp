@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blogapp-green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blogapp
+      version: green
+  template:
+    metadata:
+      labels:
+        app: blogapp
+        version: green
+    spec:
+      containers:
+      - name: blogapp
+        image: awsd43/blogapp:green # Adjust the image tag for the green version
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "500m"
+          limits:
+            memory: "1000Mi"
+            cpu: "1000m"
