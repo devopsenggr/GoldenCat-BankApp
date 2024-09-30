@@ -94,22 +94,13 @@ pipeline {
             }
         }
         
-        stage('Deploy MySQL Deployment and Service') {
-            steps {
-                script {
-                    withKubeConfig(caCertificate: '', clusterName: 'dev-medium-eks-cluster', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://617BC1EDEF36BE179A29EEC81DE27231.gr7.us-east-1.eks.amazonaws.com') {
-                        sh "kubectl apply -f mysql-ds.yml -n ${KUBE_NAMESPACE}"  // Ensure you have the MySQL deployment YAML ready
-                    }
-                }
-            }
-        }
-        
+               
         stage('Deploy SVC-APP') {
             steps {
                 script {
                     withKubeConfig(caCertificate: '', clusterName: 'dev-medium-eks-cluster', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://617BC1EDEF36BE179A29EEC81DE27231.gr7.us-east-1.eks.amazonaws.com') {
-                        sh """ if ! kubectl get svc bankapp-service -n ${KUBE_NAMESPACE}; then
-                                kubectl apply -f bankapp-service.yml -n ${KUBE_NAMESPACE}
+                        sh """ if ! kubectl get svc blogapp-service -n ${KUBE_NAMESPACE}; then
+                                kubectl apply -f blogapp-service.yml -n ${KUBE_NAMESPACE}
                               fi
                         """
                    }
@@ -152,7 +143,7 @@ pipeline {
                     withKubeConfig(caCertificate: '', clusterName: 'dev-medium-eks-cluster', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://617BC1EDEF36BE179A29EEC81DE27231.gr7.us-east-1.eks.amazonaws.com') 
                     {
                         sh '''
-                            kubectl patch service bankapp-service -p "{\\"spec\\": {\\"selector\\": {\\"app\\": \\"bankapp\\", \\"version\\": \\"''' + newEnv + '''\\"}}}" -n ${KUBE_NAMESPACE}
+                            kubectl patch service blogapp-service -p "{\\"spec\\": {\\"selector\\": {\\"app\\": \\"bankapp\\", \\"version\\": \\"''' + newEnv + '''\\"}}}" -n ${KUBE_NAMESPACE}
                         '''
                     }
                     echo "Traffic has been switched to the ${newEnv} environment."
@@ -168,7 +159,7 @@ pipeline {
                     withKubeConfig(caCertificate: '', clusterName: 'dev-medium-eks-cluster', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://617BC1EDEF36BE179A29EEC81DE27231.gr7.us-east-1.eks.amazonaws.com') 
                     {   """
                         kubectl get pods -l version=${verifyEnv} -n ${KUBE_NAMESPACE}
-                        kubectl get svc bankapp-service -n ${KUBE_NAMESPACE}
+                        kubectl get svc blogapp-service -n ${KUBE_NAMESPACE}
                         """
                     }
                 }
