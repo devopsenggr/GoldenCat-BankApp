@@ -42,9 +42,12 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar') {
-                    sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=blogapp -Dsonar.projectName=blogapp"
-                }
+                withSonarQubeEnv('sonar-server') {
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=blogapp \
+                        -Dsonar.projectKey=blogapp \
+                        -Dsonar.java.binaries=target'''
+                    }
             }
         }
         
