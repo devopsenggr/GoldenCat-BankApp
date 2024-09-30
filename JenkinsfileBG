@@ -45,7 +45,14 @@ pipeline {
                 sh "trivy fs --format table -o fs.html ."
             }
         }
-        
+        stage('publishArtifactoryToNexus') {
+            steps {
+                withMaven(globalMavenSettingsConfig: 'myglobalsettings', jdk: 'jdk17', maven: 'maven3', mavenSettingsConfig: '', traceability: true) {
+                        sh "mvn deploy"
+                }
+                
+            }
+        }
         stage('Docker build') {
             steps {
                 script {
