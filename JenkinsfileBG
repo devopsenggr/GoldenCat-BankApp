@@ -20,7 +20,18 @@ pipeline {
                 git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/devopsenggr/fullstack-blogapp.git'
             }
         }
+        stage('Compile') {
+            steps {
+            sh  "mvn compile"
+            }
+        }
         
+        
+        stage('Package') {
+            steps {
+                sh "mvn package"
+            }
+        }
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
